@@ -58,12 +58,75 @@ public static int Challenge(int[] input)
 
 //Question Two
 //2-User Class 
+public class User
+    {
+        public User()
+        {
+            UserNames = new List<string>();
+        }
 
+        public static List<string> UserNames { get; set; }
+
+        public static int UserNamesCount;
+
+        public void Add(string value)
+        {
+            UserNames.Add(value);
+            UserNamesCount++;
+        }
+
+        public int GetUsersCount()
+        {
+            return UserNamesCount;
+        }
+
+    }
 
 
 //Question Three
 //3-John the Robot 
+ public class Skill
+    {
+        public string SkillName { get; set; }
+    }
 
+    public class Dancing : Skill
+    {
+        public Dancing()
+        {
+            SkillName = "Dancing";
+        }
+    }
+
+    public class Cooking : Skill
+    {
+        public Cooking()
+        {
+            SkillName = "Cooking";
+        }
+    }
+
+
+    public class Humanoid
+    {
+        public Humanoid(Skill skill)
+        {
+            RobotSkill = skill.SkillName;
+        }
+
+        public Humanoid()
+        {
+            RobotSkill = "No Skill Defined";
+        }
+
+        public string RobotSkill { get; set; }
+
+        public string ShowSkill()
+        {
+            return RobotSkill;
+        }
+
+    }
 
 
 
@@ -82,3 +145,75 @@ public static int Challenge(int[] input)
 
 //Question Sigx
 //6- Construction Game
+    public class Building
+    {
+        public Building()
+        {
+            Rooms = new List<string>();
+        }
+
+        private List<string> Rooms { get; set; }
+        private string RoomString { get; set; }
+
+        public void Build()
+        {
+            var builder = new StringBuilder();
+            foreach (var room in Rooms)
+            {
+                if (room.Equals(Rooms.Last()))
+                {
+                    builder.Append(room);
+                }
+                else
+                {
+                    builder.Append(room).Append(',');
+                }
+            }
+
+            RoomString = builder.ToString();
+        }
+
+        public string Describe()
+        {
+            return RoomString;
+        }
+
+        public void AddRoom(string room)
+        {
+            Rooms.Add(room);
+        }
+
+
+    }
+
+    public static class BuildingExtensionMethods
+    {
+        public static Building AddKitchen(this Building building)
+        {
+            building.AddRoom("Kitchen");
+            return building;
+        }
+
+        public static Building AddBedroom(this Building building, string type)
+        {
+            if (type=="master")
+            {
+                building.AddRoom("master room");
+            }
+            else if (type=="guest")
+            {
+                building.AddRoom("guest room");
+            }
+            else
+            {
+                building.AddRoom("Another");
+            }
+            return building;
+        }
+
+        public static Building AddBalcony(this Building building)
+        {
+            building.AddRoom("Balcony");
+            return building;
+        }
+    }
